@@ -34,17 +34,17 @@
             <a class="navbar-brand" href="{% url 'points:index' %}">GEO Solutions</a>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'points:index' %}">Dashboard <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'points:new' %}">New Request</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'points:history' %}" tabindex="-1">History</a>
-                  </li>
-                </ul>
-                <!-- <form class="form-inline mt-2 mt-md-0">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{% url 'points:index' %}">Dashboard <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'points:new' %}">New Request</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'points:history' %}" tabindex="-1">History</a>
+                    </li>
+                  </ul>
+                  <!-- <form class="form-inline mt-2 mt-md-0">
                   <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form> -->
@@ -55,41 +55,33 @@
 
     <main role="main" class="container">
         <div class="jumbotron">
-          <h1>History</h1>
-          <table>
-            <th>
-              <td>
-                X
-              </td>
-              <td>
-                Y
-              </td>
-              <td>
-                N
-              </td>
-              <td>
-                Operation Type
-              </td>
-            </th>
-          {% for line in history_points %}
-            <tr>
-              <td>
-                {{ line.x }}
-              </td>
-              <td>
-                {{ line.y }}
-              </td>
-              <td>
-                {{ line.n }}
-              </td>
-              <td>
-                {{ line.operation_type }}
-              </td>
-            </tr>
-          {% endfor %}
-          </table>
+          <h1>New Request</h1>
 
-        </div>
+              <form action="{% url 'points:new' %}" method="POST">
+                <!-- <div class="form-group">
+                    <label for="x">X coordinate</label>
+                    <input type="number" class="form-control" id="x" name="x" aria-describedby="x coordinate help" placeholder="Enter X">
+                  </div>
+                  <div class="form-group">
+                    <label for="y">Y coordinate</label>
+                    <input type="number" class="form-control" id="y" name="y" aria-describedby="y coordinate help" placeholder="Enter y">
+                  </div>
+                  <div class="form-group">
+                    <label for="n">Number of points required</label>
+                    <input type="number" class="form-control" id="n" name="n" aria-describedby="number of points" placeholder="Enter number of points to be returned">
+                  </div>
+                  <div class="form-group">
+                    <label for="o">Operation type</label>
+                    <select name="operation_type">
+                        <option value="nearest">Nearest Point</option>
+                        <option value="furthest">Furthest Point</option>
+                      </select>
+                  </div> -->
+                  {% csrf_token %}
+                  {{form.as_p}}
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>        
+            </div>
       </main>
       
     </body>

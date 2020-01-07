@@ -20,6 +20,21 @@ class Point(models.Model):
     def get_absolute_url(self):
         return reverse("point_detail", kwargs={"pk": self.pk})
 
+class Result(models.Model):
+
+    number_points = models.IntegerField(_("NO. Points"))
+    points_list = models.CharField(_("Points List"), max_length=50)
+
+    class Meta:
+        verbose_name = _("result")
+        verbose_name_plural = _("results")
+
+    def __str__(self):
+        return self.pk
+
+    def get_absolute_url(self):
+        return reverse("result_detail", kwargs={"pk": self.pk})
+
 
 class History(models.Model):
 
@@ -29,13 +44,33 @@ class History(models.Model):
     operation_type = models.IntegerField(choices=((1, _("Nearest")),
                                         (2, _("Furthest"))),
                                 default=1)
+    result_id = models.ForeignKey(Result, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         verbose_name = _("history")
         verbose_name_plural = _("historys")
 
     def __str__(self):
-        return self.name
+        return str(self.pk)
 
     def get_absolute_url(self):
         return reverse("history_detail", kwargs={"pk": self.pk})
+
+
+class RefernceTable(models.Model):
+
+    pid = models.IntegerField(_("ID"))
+    x = models.FloatField(_("X"))
+    y = models.FloatField(_("Y"))
+
+    class Meta:
+        verbose_name = _("referncetable")
+        verbose_name_plural = _("referncetable")
+
+    def __str__(self):
+        return str(self.pk)
+
+    def get_absolute_url(self):
+        return reverse("referncetable_detail", kwargs={"pk": self.pk})
+
+
